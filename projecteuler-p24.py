@@ -9,9 +9,24 @@
 
 import itertools
 
+# def perm(x):
+# 	if len(x) <=1:
+# 		yield x
+# 	else:
+# 		for i in perm(x[1:]):
+# 			for j in range(len(x)):
+# 				yield i[:j] + x[0:1] + i[j:] 
+
+
+
 n = 10
 x = [str(i) for i in xrange(n)]
 y = itertools.permutations(x, n)
+tmp = perm(x)
+tmp2 = map(lambda x: x,tmp)
+tmp2.sort()
+print tmp2[1000000-1]
+
 z = map(lambda x: x, y)
 
 z.sort()
@@ -21,3 +36,4 @@ for i in z[1000000-1]:
 	iStr = iStr + i
 
 print int(iStr)
+
