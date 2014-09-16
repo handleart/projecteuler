@@ -9,43 +9,50 @@
 
 #HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
+#bah --- this assumption was wrong
+
 #abcdefghi are #s and are distinct
 #abc * de = fghi < 9900 
 #abc < 100, de < 98
 #abcd * e = fghi < 9900
-#abcd < 1237, e < 9
+#abcd < 1237, r < 9
 
 import itertools
-import re
 
-r = range(1,10)
+def findSol():
 
-abc = map(lambda x: str(x[0]) * 100 + str(x[1]) * 10 + str(x[2]), itertools.permutations(r, 3))
-de = map(lambda x: str(x[0]) * 10 + str(x[1]), itertools.permutations(r, 2))
-abcd = filter(lambda x: x < 1237, map(lambda x: str(x[0]) * 1000 + str(x[1]) * 100 + str(x[2]) * 10 + str(x[3]), itertools.permutations(r, 4)))
+	r = range(1,10)
 
-#abc = [102, 103]
-#de = [32, 43, 21]
+	abc = map(lambda x: int(x[0]) * 100 + int(x[1]) * 10 + int(x[2]), itertools.permutations(r, 3))
+	de = map(lambda x: int(x[0]) * 10 + int(x[1]), itertools.permutations(r, 2))
+	#abcd = filter(lambda x: x < 10000, map(lambda x: int(x[0]) * 1000 + int(x[1]) * 100 + int(x[2]) * 10 + int(x[3]), itertools.permutations(r, 4)))
+	abcd = map(lambda x: int(x[0]) * 1000 + int(x[1]) * 100 + int(x[2]) * 10 + int(x[3]), itertools.permutations(r, 4))
+	
+	#test data
+	#abc = [102, 103, 186]
+	# de = [32, 43, 21, 39]
+	
+	tmp = []
+	for i in abc:
+		for j in de:
+			word = str(i) + str(j) + str(i * j)
+			if len(set(word)) == 9 and len(word) == 9 and ('0' not in word):
+				#tmp.append((i,j,i*j))
+				tmp.append(i*j)
 
-tmp = []
-for i in abc:
-	for j in de:
-		word = str(i) + str(j) + str(int(i) * int(j))
-		
-		
-		#tmp.append(word)
+	for i in abcd:
+		for j in r:
+			word = str(i) + str(j) + str(i * j)
+			if len(set(word)) == 9 and len(word) == 9 and ('0' not in word):
+				#tmp.append((i,j,i*j))
+				tmp.append(i*j)
 
-for i in range(1,9):
-	for j in abcd:
-		l = str(i) + str(j) + str(int(i) * int(j))
-		tmp.append(l)
+	#print len(tmp)
+	#for i in tmp:
+	#	print i
+	return sum(set(tmp))
 
 
-tmp = ['1234', '1224']
+if __name__ == '__main__':
+	print findSol()
 
-for word in tmp:
-	for letter in word:
-		if len(re.findall(letter, word)) > 1:
-			break
-		else:
-			print word
