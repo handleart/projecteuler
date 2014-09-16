@@ -38,7 +38,7 @@ for i in xrange(1, 1000):
 
 		f.append(x / i)
 		x = x % i
-		if x == 0 or (lastX == x and lastX != 0) or x in fRem:
+		if x == 0 or x in fRem:
 			break
 		fRem.append(x % i)
 	
