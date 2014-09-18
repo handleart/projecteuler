@@ -28,5 +28,5 @@ def bruteForce(val):
 
 	return i
 
-if __name__ == '__main__':
+
 	print bruteForce(val)
